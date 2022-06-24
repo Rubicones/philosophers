@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgizzard <dgizzard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 16:17:10 by ejafer            #+#    #+#             */
-/*   Updated: 2022/03/30 21:34:16 by ejafer           ###   ########.fr       */
+/*   Created: 2022/06/24 13:56:04 by dgizzard          #+#    #+#             */
+/*   Updated: 2022/06/24 13:57:46 by dgizzard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
+
 t_philo	*init_philo(int n, t_info *info)
 {
 	t_philo			*philo;
@@ -36,10 +37,10 @@ void	free_all_philos(t_philo **philos, int count)
 {
 	int	i;
 
-	i = -1;
-	while (++i < count)
+	i = 0;
+	while (i < count - 1)
 	{
-		pthread_mutex_destroy(&philos[i]->time_last_meal_lock);
-		free(philos[i]);
+		free_philo(philos[i]);
+		i++;
 	}
 }

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgizzard <dgizzard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 19:39:29 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/24 11:17:00 by                  ###   ########.fr       */
+/*   Created: 2022/06/24 13:55:53 by dgizzard          #+#    #+#             */
+/*   Updated: 2022/06/24 13:57:36 by dgizzard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
+
 t_info	*init_info(int argc, char **argv)
 {
 	t_info			*info;

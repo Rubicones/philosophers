@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgizzard <dgizzard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 21:02:04 by ejafer            #+#    #+#             */
-/*   Updated: 2022/06/23 16:29:08 by                  ###   ########.fr       */
+/*   Created: 2022/06/24 13:55:20 by dgizzard          #+#    #+#             */
+/*   Updated: 2022/06/24 13:57:17 by dgizzard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_info			*init_info(int argc, char **argv);
 t_philo			*init_philo(int n, t_info *info);
 pthread_mutex_t	*init_forks(int count);
 
-int		ft_atoi(const char *s);
-int		isvalid_inputs(int argc, char **argv);
+int				ft_atoi(const char *s);
+int				isvalid_inputs(int argc, char **argv);
 
 void			grab_forks(t_philo *philo);
 void			release_forks(t_philo *philo);
