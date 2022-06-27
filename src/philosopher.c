@@ -6,7 +6,7 @@
 /*   By: dgizzard <dgizzard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:56:14 by dgizzard          #+#    #+#             */
-/*   Updated: 2022/06/24 13:56:14 by dgizzard         ###   ########.fr       */
+/*   Updated: 2022/06/26 18:13:04 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	*philosopher(void *ptr_philo)
 	philo->time_last_meal = current_time_ms();
 	pthread_create(&death_check, NULL, checkdead, (void *) philo);
 	pthread_detach(death_check);
-	if (philo->num - 1 % 2 != 0)
+	if (philo->num % 2 != 0)
 		philo_usleep(philo->info->time_to_eat - 10);
 	while (philo->times_must_eat)
 	{

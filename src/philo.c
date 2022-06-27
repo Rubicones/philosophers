@@ -38,7 +38,7 @@ void	free_all_philos(t_philo **philos, int count)
 	int	i;
 
 	i = 0;
-	while (i < count - 1)
+	while (i < count)
 	{
 		free_philo(philos[i]);
 		i++;

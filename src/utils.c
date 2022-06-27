@@ -6,7 +6,7 @@
 /*   By: dgizzard <dgizzard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:56:28 by dgizzard          #+#    #+#             */
-/*   Updated: 2022/06/24 13:56:29 by dgizzard         ###   ########.fr       */
+/*   Updated: 2022/06/24 22:14:02 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,13 @@ int	isvalid_inputs(int argc, char **argv)
 		return (0);
 	while (i < argc)
 	{
-		if (ft_isdigit(ft_atoi(argv[i]) == 0))
-			return (0);
+		if (ft_atoi(argv[i]) > 0)
+		{
+			if (ft_isdigit(ft_atoi(argv[i]) == 0))
+				return (0);
+		}
+		else
+			return(0);
 		i++;
 	}
 	return (1);
