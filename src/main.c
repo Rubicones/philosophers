@@ -27,6 +27,7 @@ t_info	*init_info(int argc, char **argv)
 	info->time_to_sleep = ft_atoi(argv[3]);
 	info->forks = init_forks(info->philos_count);
 	info->philos = malloc(sizeof(t_philo *) * info->philos_count);
+	info->stop_it = 0;
 	pthread_mutex_init(&info->printf_mutex, NULL);
 	pthread_mutex_init(&info->both_forks_lock, NULL);
 	return (info);
@@ -42,7 +43,7 @@ void	free_info(t_info *info)
 	free(info);
 }
 
-void	threads_init(t_info *info)
+int	threads_init(t_info *info)
 {
 	int			i;
 	t_philo		*philo;
@@ -62,9 +63,10 @@ void	threads_init(t_info *info)
 	i = 0;
 	while (i < info->philos_count)
 	{
-		pthread_join(threads[i], NULL);
+		pthread_detach(threads[i]);
 		i++;
 	}
+	return (0);
 }
 
 int	main(int argc, char	**argv)
@@ -75,6 +77,11 @@ int	main(int argc, char	**argv)
 		return (0);
 	info = init_info(argc, argv + 1);
 	threads_init(info);
-	free_info(info);
+	if (checkdead(info))
+	{
+		free_all_philos(info->philos, info->philos_count);
+		free_info(info);
+		return (0);
+	}
 	return (0);
 }

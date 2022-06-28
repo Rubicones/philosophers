@@ -25,30 +25,34 @@ void	philo_think(t_philo	*philo)
 	usleep(500);
 }
 
-void	*checkdead(void *ptr_philo)
+int 	checkdead(void *info_t)
 {	
-	t_philo		*philo;
 	t_info		*info;
+	int			i;
 
-	philo = (t_philo *) ptr_philo;
-	while (philo->times_must_eat)
+	info = (t_info *) info_t;
+	while (1)
 	{
-		usleep(1000);
-		pthread_mutex_lock(&philo->time_last_meal_lock);
-		if (current_time_ms() - philo->time_last_meal
-			>= philo->info->time_to_die)
+		i = 0;
+		while (i < info->philos_count)
 		{
-			pthread_mutex_lock(&philo->info->printf_mutex);
-			printf("%lld %d died\n",
-				current_time_ms() - philo->info->time_start, philo->num);
-			info = philo->info;
-			free_all_philos(info->philos, info->philos_count);
-			free_info(info);
-			exit(0);
+			if (info->stop_it == info->philos_count - 1)
+				return (1);
+			usleep(1000);
+			pthread_mutex_lock(&info->philos[i]->time_last_meal_lock);
+			if (current_time_ms() - info->philos[i]->time_last_meal
+				>= info->time_to_die)
+			{
+				pthread_mutex_lock(&info->printf_mutex);
+				printf("%lld %d died\n",
+					   current_time_ms() - info->time_start, info->philos[i]->num);
+				return (1);
+			}
+			pthread_mutex_unlock(&info->philos[i]->time_last_meal_lock);
+			i++;
 		}
-		pthread_mutex_unlock(&philo->time_last_meal_lock);
+
 	}
-	return (NULL);
 }
 
 void	philo_eat(t_philo *philo)
@@ -66,13 +70,10 @@ void	philo_eat(t_philo *philo)
 void	*philosopher(void *ptr_philo)
 {
 	t_philo			*philo;
-	pthread_t		death_check;
 
 	philo = (t_philo *) ptr_philo;
 	pthread_mutex_init(&philo->time_last_meal_lock, NULL);
 	philo->time_last_meal = current_time_ms();
-	pthread_create(&death_check, NULL, checkdead, (void *) philo);
-	pthread_detach(death_check);
 	if (philo->num % 2 != 0)
 		philo_usleep(philo->info->time_to_eat - 10);
 	while (philo->times_must_eat)
@@ -81,6 +82,6 @@ void	*philosopher(void *ptr_philo)
 		philo_sleep(philo);
 		philo_think(philo);
 	}
-	free_philo(philo);
+	philo->info->stop_it++;
 	return (NULL);
 }

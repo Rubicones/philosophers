@@ -49,6 +49,9 @@ void	free_forks(pthread_mutex_t *forks, int count)
 
 	i = -1;
 	while (++i < count)
+	{
+		pthread_mutex_unlock(&forks[i]);
 		pthread_mutex_destroy(&forks[i]);
+	}
 	free(forks);
 }

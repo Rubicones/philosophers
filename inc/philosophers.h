@@ -33,6 +33,7 @@ typedef struct s_info
 	pthread_mutex_t	printf_mutex;
 	t_philo			**philos;
 	pthread_t		*threads;
+	int				stop_it;
 }	t_info;
 
 typedef struct s_philo
@@ -51,6 +52,7 @@ void			*philosopher(void *ptr_philo);
 t_info			*init_info(int argc, char **argv);
 t_philo			*init_philo(int n, t_info *info);
 pthread_mutex_t	*init_forks(int count);
+int				checkdead(void *info_t);
 
 int				ft_atoi(const char *s);
 int				isvalid_inputs(int argc, char **argv);

@@ -29,6 +29,7 @@ t_philo	*init_philo(int n, t_info *info)
 
 void	free_philo(t_philo *philo)
 {
+	pthread_mutex_unlock(&philo->time_last_meal_lock);
 	pthread_mutex_destroy(&philo->time_last_meal_lock);
 	free(philo);
 }
