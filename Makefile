@@ -11,7 +11,7 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(NAMES)))
 D_FILES		=	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(NAMES)))
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -O2
+CFLAGS		=	-Wall -Wextra -Werror -O2 -pthread
 
 MD			=	mkdir
 
